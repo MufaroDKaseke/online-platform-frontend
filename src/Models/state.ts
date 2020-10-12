@@ -1,9 +1,8 @@
 
-class State {
-    public content: any[] = [];
+export default class State {
+    public content!: string;
     public collapsed?: boolean = false;
 
 }
 
 
-export default State;

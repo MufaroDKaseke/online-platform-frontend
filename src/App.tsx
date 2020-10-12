@@ -6,6 +6,7 @@ import { LaptopOutlined } from "@ant-design/icons";
 import "./App.css";
 import State from "./Models/state";
 import RestService from "./services/restService";
+import ChallengeDto from "./Models/challenge.dto";
 const { SubMenu } = Menu;
 
 const { Header, Content, Sider } = Layout;
@@ -18,8 +19,9 @@ class App extends Component<any, State> {
 
   componentDidMount = async () => {
     const restService = new RestService();
-    const challenge = await restService.get("challeges", "1");
+    const challenge = await restService.get<ChallengeDto>("challenges", "1");
     console.log(challenge);
+    this.setState({ content: challenge.Content });
   };
   onCollapse = (collapsed: boolean) => {
     this.setState({ collapsed });
@@ -63,7 +65,7 @@ class App extends Component<any, State> {
           <Content
             style={{ padding: "24px", minHeight: "100vh", background: "#fff" }}
           >
-            <ReactMarkdown source={this.state.content[0]?.Content} />
+            <ReactMarkdown source={this.state.content} />
           </Content>
         </Layout>
       </Layout>

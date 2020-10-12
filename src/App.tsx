@@ -1,18 +1,14 @@
 import React from "react";
 import { Component } from "react";
 import ReactMarkdown from "react-markdown";
-import axios, { AxiosResponse } from "axios";
-import { Layout, Menu, Breadcrumb } from "antd";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+import { Layout, Menu } from "antd";
+import { LaptopOutlined } from "@ant-design/icons";
 import "./App.css";
 import State from "./Models/state";
+import RestService from "./services/restService";
 const { SubMenu } = Menu;
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 class App extends Component<any, State> {
   constructor(props: any) {
@@ -21,24 +17,11 @@ class App extends Component<any, State> {
   }
 
   componentDidMount = async () => {
-    const response: AxiosResponse = await axios.get(
-      "http://localhost:1337/challenges/",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjAyNDM0MjMxLCJleHAiOjE2MDUwMjYyMzF9.LkazKPjnOLhjAxhopUKQpqc5knPE8GFDFB3kzj27EIc",
-        },
-      }
-    );
-
-    const state: State = { content: response.data };
-    this.setState(state);
-
-    console.log(this.state);
+    const restService = new RestService();
+    const challenge = await restService.get("challeges", "1");
+    console.log(challenge);
   };
   onCollapse = (collapsed: boolean) => {
-    console.log(collapsed);
     this.setState({ collapsed });
   };
   render() {

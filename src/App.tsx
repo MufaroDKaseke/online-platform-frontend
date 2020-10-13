@@ -19,9 +19,9 @@ class App extends Component<any, State> {
 
   componentDidMount = async () => {
     const restService = new RestService();
-    const challenge = await restService.get<ChallengeDto>("challenges", "1");
+    const challenge = await restService.get<ChallengeDto>("challenges", "5f85fb602e8f1639fa578093");
     console.log(challenge);
-    this.setState({ content: challenge.Content });
+    this.setState({ content: challenge.content });
   };
   onCollapse = (collapsed: boolean) => {
     this.setState({ collapsed });

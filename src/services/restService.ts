@@ -21,6 +21,22 @@ class RestService {
         return response.data
     }
 
+
+    public async post<T extends Dto>(resource: string, data: T) {
+        const response = await this.axiosInstance.post<T>(`${process.env.REACT_APP_SERVER_URL}/${resource}`, data);
+        return response.data;
+    }
+
+    public async put<T extends Dto>(resource: string, data: T) {
+        const response = await this.axiosInstance.put<T>(`${process.env.REACT_APP_SERVER_URL}/${resource}/${data.id}`, data);
+        return response.data;
+    }
+
+    public async delete<T extends Dto>(resource: string, id: string) {
+        const response = await this.axiosInstance.delete<T>(`${process.env.REACT_APP_SERVER_URL}/${resource}/${id}`);
+        return response.data;
+    }
+
 }
 
 export default RestService

@@ -7,20 +7,31 @@ import "./App.css";
 import State from "./Models/state";
 import RestService from "./services/restService";
 import ChallengeDto from "./Models/challenge.dto";
+import parse from "html-react-parser";
+import { CategoryDto } from "./Models/category.dto";
+
 const { SubMenu } = Menu;
 
 const { Header, Content, Sider } = Layout;
 
 class App extends Component<any, State> {
+  private restService = new RestService();
+
   constructor(props: any) {
     super(props);
     this.state = new State();
   }
 
   componentDidMount = async () => {
-    const restService = new RestService();
-    const challenge = await restService.get<ChallengeDto>("challenges", "5f85fb602e8f1639fa578093");
-    console.log(challenge);
+    const challenge = await this.restService.get<ChallengeDto>(
+      "challenges",
+      "5f85fb602e8f1639fa578093"
+    );
+    const categories = await this.restService.query<CategoryDto>("categories");
+    if (!!categories && categories.length > 0) {
+      this.setState({ content: challenge.content, categories });
+      return;
+    }
     this.setState({ content: challenge.content });
   };
   onCollapse = (collapsed: boolean) => {
@@ -52,11 +63,11 @@ class App extends Component<any, State> {
                 key="sub2"
                 icon={<LaptopOutlined />}
                 title="Weekly Challenges"
+                
               >
-                <Menu.Item key="5">ReactJs</Menu.Item>
-                <Menu.Item key="6">Spark AR</Menu.Item>
-                <Menu.Item key="7">Messenger Platform</Menu.Item>
-                <Menu.Item key="8">Wit AI</Menu.Item>
+                {this.state.categories?.map((category, index) => (
+                  <Menu.Item key={index}>{category.Name}</Menu.Item>
+                ))}
               </SubMenu>
               <Menu.Item>Logout</Menu.Item>
             </Menu>
@@ -65,7 +76,10 @@ class App extends Component<any, State> {
           <Content
             style={{ padding: "24px", minHeight: "100vh", background: "#fff" }}
           >
-            <ReactMarkdown source={this.state.content} />
+            <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
+            {/* {parse(this.state.content, {
+              htmlparser2: { recognizeSelfClosing: true, lowerCaseTags: true },
+            })} */}
           </Content>
         </Layout>
       </Layout>

@@ -37,6 +37,11 @@ class RestService {
         return response.data;
     }
 
+    public async query<T extends Dto>(resource: string, params={}) {
+        const response = await this.axiosInstance.get<T[]>(`${process.env.REACT_APP_SERVER_URL}/${resource}`);
+        return response.data;
+    }
+
 }
 
 export default RestService

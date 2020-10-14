@@ -1,14 +1,15 @@
 import React from "react";
 import { Component } from "react";
-import ReactMarkdown from "react-markdown";
 import { Layout, Menu } from "antd";
 import { LaptopOutlined } from "@ant-design/icons";
 import "./App.css";
 import State from "./Models/state";
 import RestService from "./services/restService";
 import ChallengeDto from "./Models/challenge.dto";
-import parse from "html-react-parser";
 import { CategoryDto } from "./Models/category.dto";
+import { LoadingOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
+const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
 const { SubMenu } = Menu;
 
@@ -76,6 +77,9 @@ class App extends Component<any, State> {
           <Content
             style={{ padding: "24px", minHeight: "100vh", background: "#fff" }}
           >
+            <div>
+              <Spin indicator={antIcon}/>
+            </div>
             <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
             {/* {parse(this.state.content, {
               htmlparser2: { recognizeSelfClosing: true, lowerCaseTags: true },

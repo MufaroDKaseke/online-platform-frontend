@@ -1,6 +1,4 @@
 import Dto from "./dto";
-
-
 export class CategoryDto extends Dto {
 
     public Name!: string;

@@ -36,6 +36,7 @@ class App extends Component<any, State> {
     }
     this.setState({ content: challenge.content });
   };
+
   onCollapse = (collapsed: boolean) => {
     this.setState({ collapsed });
   };
@@ -81,10 +82,6 @@ class App extends Component<any, State> {
             <div>
               <Spin indicator={antIcon} />
             </div>
-            <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
-            {/* {parse(this.state.content, {
-              htmlparser2: { recognizeSelfClosing: true, lowerCaseTags: true },
-            })} */}
           </Content>
         </Layout>
       </Layout>

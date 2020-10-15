@@ -7,8 +7,9 @@ import State from "./Models/state";
 import RestService from "./services/restService";
 import ChallengeDto from "./Models/challenge.dto";
 import { CategoryDto } from "./Models/category.dto";
-import { LoadingOutlined } from '@ant-design/icons';
-import { Spin } from 'antd';
+import { LoadingOutlined } from "@ant-design/icons";
+import { Spin } from "antd";
+import "wysiwyg.css";
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
 const { SubMenu } = Menu;
@@ -26,7 +27,7 @@ class App extends Component<any, State> {
   componentDidMount = async () => {
     const challenge = await this.restService.get<ChallengeDto>(
       "challenges",
-      "5f85fb602e8f1639fa578093"
+      "5f87e6bbe094fcd2deebebb6"
     );
     const categories = await this.restService.query<CategoryDto>("categories");
     if (!!categories && categories.length > 0) {
@@ -64,7 +65,6 @@ class App extends Component<any, State> {
                 key="sub2"
                 icon={<LaptopOutlined />}
                 title="Weekly Challenges"
-                
               >
                 {this.state.categories?.map((category, index) => (
                   <Menu.Item key={index}>{category.Name}</Menu.Item>
@@ -75,10 +75,11 @@ class App extends Component<any, State> {
           </Sider>
 
           <Content
+          className='wysiwyg'
             style={{ padding: "24px", minHeight: "100vh", background: "#fff" }}
           >
             <div>
-              <Spin indicator={antIcon}/>
+              <Spin indicator={antIcon} />
             </div>
             <div dangerouslySetInnerHTML={{ __html: this.state.content }} />
             {/* {parse(this.state.content, {

@@ -4,6 +4,7 @@ export default class State {
     public content!: string;
     public collapsed?: boolean = true;
     public categories!: CategoryDto[];
+    public theme!: 'dark' | 'light';
 }
 
 

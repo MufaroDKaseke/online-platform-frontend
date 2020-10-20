@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Layout, Menu } from "antd";
+import { Layout, Menu, Switch as SwitchButton } from "antd";
 import { LaptopOutlined } from "@ant-design/icons";
 import "./App.css";
 import State from "./Models/state";
@@ -42,14 +42,30 @@ class App extends Component<any, State> {
   onCollapse = (collapsed: boolean) => {
     this.setState({ collapsed });
   };
+  changeTheme = (value: boolean) => {
+    this.setState({
+      theme: value ? "dark" : "light",
+    });
+  };
   render() {
     return (
       <Router>
         <Layout>
           <Header>
-            <Menu theme="dark" mode="horizontal">
+            <Menu
+              theme={this.state.theme === "dark" ? "dark" : "light"}
+              mode="horizontal"
+            >
               <Menu.Item key="1">Home</Menu.Item>
-              <Menu.Item key="3">Logout</Menu.Item>
+              <Menu.Item key="2">Logout</Menu.Item>
+              <Menu.Item key="3">
+                <SwitchButton
+                  checked={this.state.theme === "dark" ? true : false}
+                  onChange={this.changeTheme}
+                  checkedChildren="Dark"
+                  unCheckedChildren="Light"
+                />
+              </Menu.Item>
             </Menu>
           </Header>
           <Layout>
@@ -60,6 +76,7 @@ class App extends Component<any, State> {
               onCollapse={this.onCollapse}
             >
               <Menu
+                theme={this.state.theme === "dark" ? "dark" : "light"}
                 mode="inline"
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}

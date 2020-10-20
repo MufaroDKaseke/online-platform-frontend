@@ -10,6 +10,7 @@ import { CategoryDto } from "./Models/category.dto";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
 import "wysiwyg.css";
+import ChallengesGrid from "./components/ChallengesGrid";
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
 const { SubMenu } = Menu;
@@ -82,6 +83,7 @@ class App extends Component<any, State> {
             <div>
               <Spin indicator={antIcon} />
             </div>
+            <ChallengesGrid/>
           </Content>
         </Layout>
       </Layout>

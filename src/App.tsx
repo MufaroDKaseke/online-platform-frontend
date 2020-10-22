@@ -115,7 +115,7 @@ class App extends Component<any, State> {
                     path={`/${cat.Name}`}
                     exact={true}
                     children={
-                      <ChallengesGrid title={cat.Name} challenges={[]} />
+                      <ChallengesGrid title={cat.Name} categoryName={cat.Name} challengeName={''} challenges={[]} />
                     }
                   />
                 ))}

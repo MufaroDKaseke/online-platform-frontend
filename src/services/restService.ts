@@ -1,9 +1,8 @@
 
 import axios, { AxiosRequestConfig } from 'axios'
 import Dto from '../Models/dto'
-import { CreateQueryParams, RequestQueryBuilder } from '@nestjsx/crud-request';
-import qs from 'qs'
-
+// import { CreateQueryParams, RequestQueryBuilder } from '@nestjsx/crud-request';
+const qs = require('qs');
 class RestService {
 
     private axiosInstance = axios.create({
@@ -39,19 +38,18 @@ class RestService {
         return response.data;
     }
 
-    public async query<T extends Dto>(resource: string, params?: AxiosRequestConfig) {
+    public async query<T extends Dto>(resource: string, params?: any) {
 
         let url = `${process.env.REACT_APP_SERVER_URL}/${resource}`;
 
-        // if (!!params) {
-        //     const queryString = RequestQueryBuilder.create(params).query();
+        if (!!params) {
+            const queryString = qs.stringify(params);
+            if (queryString !== '') {
+                url += '?' + queryString;
+            }
+        }
 
-        //     if (queryString !== '') {
-        //         url += '?' + queryString;
-        //     }
-        // }
-
-        const response = await this.axiosInstance.get<T[]>(url, {});
+        const response = await this.axiosInstance.get<T[]>(url, params);
         return response.data;
     }
 

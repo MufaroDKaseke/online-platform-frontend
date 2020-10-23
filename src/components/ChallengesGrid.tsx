@@ -27,7 +27,7 @@ class ChallengesGrid extends Component<ChallengesProps, any> {
         <h1>{this.props.title}</h1>
         <Row gutter={[16, 24]} style={{ background: "#fff" }}>
           {!!this.state.challenges && this.state.challenges.length === 0 ? (
-            <p style={{textAlign:'center',}}>No Challenges at the moment</p>
+            <p style={{textAlign:'center'}}>No Challenges at the moment</p>
           ) : (
             this.state.challenges?.map(
               (challenge: ChallengeDto, index: number) => {

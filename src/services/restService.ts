@@ -1,7 +1,6 @@
 
-import axios, { AxiosRequestConfig } from 'axios'
+import axios from 'axios'
 import Dto from '../Models/dto'
-// import { CreateQueryParams, RequestQueryBuilder } from '@nestjsx/crud-request';
 const qs = require('qs');
 class RestService {
 

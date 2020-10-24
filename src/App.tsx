@@ -5,7 +5,6 @@ import { LaptopOutlined } from "@ant-design/icons";
 import "./App.css";
 import State from "./Models/state";
 import RestService from "./services/restService";
-import ChallengeDto from "./Models/challenge.dto";
 import { CategoryDto } from "./Models/category.dto";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Spin } from "antd";
@@ -28,7 +27,6 @@ class App extends Component<any, State> {
   }
 
   componentDidMount = async () => {
-  
     const categories = await this.restService.query<CategoryDto>("categories");
     if (!!categories && categories.length > 0) {
       this.setState({ categories });
@@ -53,7 +51,9 @@ class App extends Component<any, State> {
               theme={this.state.theme === "dark" ? "dark" : "light"}
               mode="horizontal"
             >
-              <Menu.Item key="1">Home</Menu.Item>
+              <Menu.Item key="1">
+                <Link to={"/"}>HOME</Link>
+              </Menu.Item>
               <Menu.Item key="2">Logout</Menu.Item>
               <Menu.Item key="3">
                 <SwitchButton
@@ -103,7 +103,9 @@ class App extends Component<any, State> {
               }}
             >
               <div>
-                <Spin indicator={antIcon} />
+                {
+                  this.state.loading?<Spin indicator={antIcon} />:''
+                }
               </div>
               <Switch>
                 <Route
@@ -114,7 +116,7 @@ class App extends Component<any, State> {
                 />
                 {this.state.categories?.map((cat, index) => (
                   <Route
-                    key={index+1}
+                    key={index + 1}
                     path={`/${cat.Name}`}
                     exact={true}
                     children={

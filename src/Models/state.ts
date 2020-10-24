@@ -5,8 +5,9 @@ export default class State {
     public content!: string;
     public collapsed?: boolean = true;
     public categories!: CategoryDto[];
-    public challenges!:ChallengeDto[];
+    public challenges!: ChallengeDto[];
     public theme!: 'dark' | 'light';
+    public loading!: boolean;
 }
 
 

@@ -6,7 +6,6 @@ import ChallengesProps from "../Models/challenges.props";
 import RestService from "../services/restService";
 import ChallengeDto from "../Models/challenge.dto";
 
-const { Content } = Layout;
 class ChallengesGrid extends Component<ChallengesProps, any> {
   private restService = new RestService();
   constructor(props: ChallengesProps) {
@@ -15,10 +14,12 @@ class ChallengesGrid extends Component<ChallengesProps, any> {
   }
 
   async componentDidMount() {
+    this.setState({ loading: true });
     const challenges = await this.restService.query("challenges", {
       _where: [{ "category.Name_eq": this.props.categoryName }],
     });
     this.setState({ challenges });
+    this.setState({ loading: false });
   }
 
   render() {
@@ -27,7 +28,7 @@ class ChallengesGrid extends Component<ChallengesProps, any> {
         <h1>{this.props.title}</h1>
         <Row gutter={[16, 24]} style={{ background: "#fff" }}>
           {!!this.state.challenges && this.state.challenges.length === 0 ? (
-            <p style={{textAlign:'center'}}>No Challenges at the moment</p>
+            <p style={{ textAlign: "center" }}>No Challenges at the moment</p>
           ) : (
             this.state.challenges?.map(
               (challenge: ChallengeDto, index: number) => {

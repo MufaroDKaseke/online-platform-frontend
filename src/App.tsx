@@ -12,6 +12,7 @@ import { Spin } from "antd";
 import "wysiwyg.css";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import ChallengesGrid from "./components/ChallengesGrid";
+import WelcomeComponent from "./components/Welcome";
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
 const { SubMenu } = Menu;
@@ -109,13 +110,24 @@ class App extends Component<any, State> {
                 <Spin indicator={antIcon} />
               </div>
               <Switch>
+                <Route
+                  key={0}
+                  path={"/"}
+                  exact={true}
+                  children={<WelcomeComponent />}
+                />
                 {this.state.categories?.map((cat, index) => (
                   <Route
-                    key={index}
+                    key={index+1}
                     path={`/${cat.Name}`}
                     exact={true}
                     children={
-                      <ChallengesGrid title={cat.Name} challenges={[]} />
+                      <ChallengesGrid
+                        title={cat.Name}
+                        categoryName={cat.Name}
+                        challengeName={""}
+                        challenges={[]}
+                      />
                     }
                   />
                 ))}

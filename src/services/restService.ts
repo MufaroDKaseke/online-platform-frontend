@@ -1,7 +1,7 @@
 
-import axios, { } from 'axios'
+import axios from 'axios'
 import Dto from '../Models/dto'
-
+const qs = require('qs');
 class RestService {
 
     private axiosInstance = axios.create({
@@ -37,9 +37,23 @@ class RestService {
         return response.data;
     }
 
-    public async query<T extends Dto>(resource: string, params={}) {
-        const response = await this.axiosInstance.get<T[]>(`${process.env.REACT_APP_SERVER_URL}/${resource}`);
+    public async query<T extends Dto>(resource: string, params?: any) {
+
+        let url = `${process.env.REACT_APP_SERVER_URL}/${resource}`;
+
+        if (!!params) {
+            const queryString = qs.stringify(params);
+            if (queryString !== '') {
+                url += '?' + queryString;
+            }
+        }
+
+        const response = await this.axiosInstance.get<T[]>(url, params);
         return response.data;
+    }
+
+    public get restInstance() {
+        return this.axiosInstance;
     }
 
 }

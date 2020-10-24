@@ -5,6 +5,7 @@ import State from "../Models/state";
 import ChallengesProps from "../Models/challenges.props";
 import RestService from "../services/restService";
 import ChallengeDto from "../Models/challenge.dto";
+import { Link } from "react-router-dom";
 
 class ChallengesGrid extends Component<ChallengesProps, any> {
   private restService = new RestService();
@@ -34,21 +35,23 @@ class ChallengesGrid extends Component<ChallengesProps, any> {
               (challenge: ChallengeDto, index: number) => {
                 return (
                   <Col xs={{ span: 24 }} md={{ span: 8 }} key={index}>
-                    <Card
-                      title={challenge.title}
-                      style={{
-                        width: "100%",
-                      }}
-                    >
-                      <div
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            challenge.content.length >= 310
-                              ? challenge.content.substring(0, 310) + "..."
-                              : challenge.content,
+                    <Link to={`/challenge/${challenge.id}`}>
+                      <Card
+                        title={challenge.title}
+                        style={{
+                          width: "100%",
                         }}
-                      />
-                    </Card>
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              challenge.content.length >= 310
+                                ? challenge.content.substring(0, 310) + "..."
+                                : challenge.content,
+                          }}
+                        />
+                      </Card>
+                    </Link>
                   </Col>
                 );
               }

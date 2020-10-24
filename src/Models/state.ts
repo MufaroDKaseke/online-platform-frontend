@@ -8,6 +8,7 @@ export default class State {
     public challenges!: ChallengeDto[];
     public theme!: 'dark' | 'light';
     public loading!: boolean;
+    public challenge!:ChallengeDto;
 }
 
 

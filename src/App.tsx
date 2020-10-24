@@ -12,6 +12,7 @@ import "wysiwyg.css";
 import { Link, Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import ChallengesGrid from "./components/ChallengesGrid";
 import WelcomeComponent from "./components/Welcome";
+import SingleChallenge from "./components/Single.Challenge";
 const antIcon = <LoadingOutlined style={{ fontSize: 30 }} spin />;
 
 const { SubMenu } = Menu;
@@ -103,9 +104,7 @@ class App extends Component<any, State> {
               }}
             >
               <div>
-                {
-                  this.state.loading?<Spin indicator={antIcon} />:''
-                }
+                {this.state.loading ? <Spin indicator={antIcon} /> : ""}
               </div>
               <Switch>
                 <Route
@@ -129,6 +128,9 @@ class App extends Component<any, State> {
                     }
                   />
                 ))}
+                <Route path={"/challenge/:id"} exact={true}>
+                  <SingleChallenge />
+                </Route>
               </Switch>
             </Content>
           </Layout>

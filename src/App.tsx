@@ -28,16 +28,12 @@ class App extends Component<any, State> {
   }
 
   componentDidMount = async () => {
-    const challenge = await this.restService.get<ChallengeDto>(
-      "challenges",
-      "5f87e6bbe094fcd2deebebb6"
-    );
+  
     const categories = await this.restService.query<CategoryDto>("categories");
     if (!!categories && categories.length > 0) {
-      this.setState({ content: challenge.content, categories });
+      this.setState({ categories });
       return;
     }
-    this.setState({ content: challenge.content });
   };
 
   onCollapse = (collapsed: boolean) => {

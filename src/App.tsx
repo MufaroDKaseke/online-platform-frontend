@@ -55,7 +55,7 @@ class App extends Component<any, State> {
               <Menu.Item key="1">
                 <Link to={"/"}>HOME</Link>
               </Menu.Item>
-              <Menu.Item key="2">Logout</Menu.Item>
+              {/* <Menu.Item key="2">Logout</Menu.Item> */}
               <Menu.Item key="3">
                 <SwitchButton
                   checked={this.state.theme === "dark" ? true : false}
@@ -91,7 +91,7 @@ class App extends Component<any, State> {
                     </Menu.Item>
                   ))}
                 </SubMenu>
-                <Menu.Item>Logout</Menu.Item>
+                {/* <Menu.Item>Logout</Menu.Item> */}
               </Menu>
             </Sider>
 

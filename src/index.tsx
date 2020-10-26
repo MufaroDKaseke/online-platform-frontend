@@ -4,7 +4,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createStore,combineReducers } from "redux";
 import { Provider } from "react-redux";
-import rootReducers from "./redux/reducers";
+// import rootReducers from "./redux/reducers";
 require("dotenv").config();
 const store = createStore(combineReducers({}));
 ReactDOM.render(

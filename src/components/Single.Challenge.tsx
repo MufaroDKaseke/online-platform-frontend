@@ -23,7 +23,7 @@ class SingleChallenge extends Component<any, any> {
       this.id
     );
     this.setState({ challenge });
-    this.setState({ loading: false });
+    // this.setState({ loading: false });
   }
   render() {
     return (

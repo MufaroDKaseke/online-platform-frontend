@@ -1,6 +1,6 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { Component } from "react";
 import State from "../Models/state";
-import { useParams, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import RestService from "../services/restService";
 import ChallengeDto from "../Models/challenge.dto";
 

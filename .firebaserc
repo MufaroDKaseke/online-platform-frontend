@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "online-platform-devc-harare"
+    "prod": "devc-3a85c",
+    "default": "devc-3a85c"
   }
 }

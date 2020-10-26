@@ -17,11 +17,13 @@ class SingleChallenge extends Component<any, any> {
   }
 
   async componentDidMount() {
+    this.setState({ loading: true });
     const challenge = await this.restService.get<ChallengeDto>(
       "challenges",
       this.id
     );
     this.setState({ challenge });
+    this.setState({ loading: false });
   }
   render() {
     return (
@@ -33,9 +35,5 @@ class SingleChallenge extends Component<any, any> {
     );
   }
 }
-
-// let getChallenge = async () => {
-//   challenge = await restService.get<ChallengeDto>("challenges", id);
-// };
 
 export default withRouter(SingleChallenge);
